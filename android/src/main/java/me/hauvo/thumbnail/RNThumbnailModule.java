@@ -44,7 +44,12 @@ public class RNThumbnailModule extends ReactContextBaseJavaModule {
     retriever.setDataSource(filePath);
     Bitmap image = retriever.getFrameAtTime(1000000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
 
-    String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/thumb";
+    /**
+     * android should use internal storage, and avoid permissions
+     * https://github.com/phuochau/react-native-thumbnail/issues/34
+     */
+    //String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/thumb";
+    String fullPath = reactContext.getFilesDir().getAbsolutePath() + "/thumb";
 
     try {
       File dir = new File(fullPath);
